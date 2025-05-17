@@ -6,7 +6,7 @@ void valid(char msg[])
     bool isValid = true;
     for (int i = 0; msg[i] != '\0'; i++)
     {
-        if (!((msg[i] >= 65 && msg[i] <= 90) || (msg[i] >= 97 && msg[i] <= 122)))
+        if (!((msg[i] >= 65 && msg[i] <= 90) || !(msg[i] >= 97 && msg[i] <= 122)))
         {
             isValid = false;
         }
