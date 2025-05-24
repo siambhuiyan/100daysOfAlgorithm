@@ -1,33 +1,38 @@
 #include <iostream>
+#include <cstring>
 using namespace std;
 
-void anagramCheck(char a[], char b[])
+bool isAnagram(char a[], char b[])
 {
-    bool found;
+    int countA[256] = {0};
+    int countB[256] = {0};
+
+    // if lengths don't match, not an anagram
+    if (strlen(a) != strlen(b))
+        return false;
+
     for (int i = 0; a[i] != '\0'; i++)
     {
-        found = true;
-        for (int j = 0; b[j] != '\0'; j++)
-        {
-            if (a[i] != b[j] && b[j + 1] == '\0')
-            {
-                found = false;
-                break;
-            }
-        }
-        if (!found)
-            break;
+        countA[(unsigned char)a[i]]++;
+        countB[(unsigned char)b[i]]++;
     }
-    if (found)
-        cout << "It is an anagram" << endl;
-    else
-        cout << "It is not an anagram" << endl;
-}
 
+    for (int i = 0; i < 256; i++)
+    {
+        if (countA[i] != countB[i])
+            return false;
+    }
+
+    return true;
+}
 int main()
 {
     char a[] = "decimal";
     char b[] = "medical";
-    anagramCheck(a, b);
+    if (isAnagram(a, b))
+        cout << "It is an anagram" << endl;
+    else
+        cout << "It is not an anagram" << endl;
+
     return 0;
 }
